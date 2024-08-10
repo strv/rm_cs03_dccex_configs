@@ -1,0 +1,2 @@
+# rm_cs03_dccex_configs
+RM-CS03基板をDCC-EXで利用できるようにするためのファイル群
