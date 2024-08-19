@@ -1,2 +1,2 @@
-# rm_cs03_dccex_configs
-RM-CS03基板をDCC-EXで利用できるようにするためのファイル群
+# rm_cs03_excs_configs
+RM-CS03基板をEX-CommandStationで利用できるようにするためのファイル群
