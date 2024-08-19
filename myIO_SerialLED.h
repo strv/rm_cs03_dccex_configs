@@ -15,8 +15,8 @@
  *  along with CommandStation.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef IO_SERIALLED_H
-#define IO_SERIALLED_H
+#ifndef MYIO_SERIALLED_H
+#define MYIO_SERIALLED_H
 
 #ifdef ARDUINO_ARCH_ESP32
 
