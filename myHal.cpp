@@ -6,7 +6,7 @@
 #define SLED_PIN (27)
 
 void halSetup() {
-  SerialLED::create(27);
+  SerialLED::create(SLED_PIN);
 }
 
 #endif
