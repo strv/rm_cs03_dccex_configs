@@ -94,34 +94,45 @@ protected:
 
   void _loop(unsigned long currentMicros) override {
     const auto md = TrackManager::getMainDrivers();
-    POWERMODE power = md[0]->getPower();
-    if (power == POWERMODE::ALERT)
-      _alert_trig_us = currentMicros;
-    else if (power == POWERMODE::ON && _power_prev == POWERMODE::ALERT)
+    if (md.size() != 0)
     {
-      if (currentMicros - _alert_trig_us < ALERT_KEEP_DURATION)
-        power = _power_prev;
-    }
+      // if the track is MAIN mode
+      POWERMODE power = TrackManager::getMainPower();
+      if (power == POWERMODE::ALERT)
+        _alert_trig_us = currentMicros;
+      else if (power == POWERMODE::ON && _power_prev == POWERMODE::ALERT)
+      {
+        if (currentMicros - _alert_trig_us < ALERT_KEEP_DURATION)
+          power = _power_prev;
+      }
 
-    switch (power)
+      switch (power)
+      {
+        case POWERMODE::OFF:
+        setColor(64,64,64);
+        break;
+
+        case POWERMODE::ON:
+        setColor(0,255,0);
+        break;
+
+        case POWERMODE::ALERT:
+        setColor(128,128,0);
+        break;
+
+        case POWERMODE::OVERLOAD:
+        setColor(255,0,0);
+        break;
+      }
+      _power_prev = power;
+    }
+    else
     {
-      case POWERMODE::OFF:
-      setColor(32,32,32);
-      break;
-
-      case POWERMODE::ON:
-      setColor(0,128,0);
-      break;
-
-      case POWERMODE::ALERT:
-      setColor(64,64,0);
-      break;
-
-      case POWERMODE::OVERLOAD:
-      setColor(128,0,0);
-      break;
+      // if the track other than MAIN mode
+      // include PROG, DC, DCX or others.
+      // Only change a LED to fixed color because current interface can not get mode from track manager.
+      setColor(0,0,255);
     }
-    _power_prev = power;
     delayUntil(currentMicros + 10000UL);
   }
 
