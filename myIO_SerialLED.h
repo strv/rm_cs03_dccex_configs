@@ -97,7 +97,7 @@ protected:
     if (md.size() != 0)
     {
       // if the track is MAIN mode
-      POWERMODE power = TrackManager::getMainPower();
+      POWERMODE power = md[0]->getPower();
       if (power == POWERMODE::ALERT)
         _alert_trig_us = currentMicros;
       else if (power == POWERMODE::ON && _power_prev == POWERMODE::ALERT)
